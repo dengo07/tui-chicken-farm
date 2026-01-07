@@ -9,7 +9,7 @@ void initialize(){
     keypad(stdscr, TRUE);
     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     curs_set(0);
-    timeout(100);
+    timeout(60);
 
 }
 

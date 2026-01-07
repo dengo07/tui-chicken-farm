@@ -1,16 +1,40 @@
 #include "models.hpp"
 
-
 void Chicken::setState(ChickenState newState){
     state = newState;
 }
 
 
-Food* Chicken::closestFood(){
+std::pair<Food*, int> Chicken::closestFood() {
+   
+    std::pair<Food*, int> ret = {nullptr, -1};
 
+    if (foods == nullptr || foods->empty()) {
+        return ret;
+    }
+
+    double minDistance = 1e18; 
+
+    for (int i = 0; i < foods->size(); i++) {
+        int dx = foods->at(i)->position[0] - position[0];
+        int dy = foods->at(i)->position[1] - position[1];
+        
+        double currDistance = sqrt(dx * dx + dy * dy); 
+
+        if (currDistance < minDistance) {
+            minDistance = currDistance;
+            ret.first = foods->at(i);
+            ret.second = i;
+        }
+    }
+    return ret;
 }
 
 void Chicken::updatePosition(){
+    std::pair<Food*,int> food;
+ 
+    food = closestFood();
+    
     switch (state)
     {
     case ChickenState::STANDING:
@@ -22,7 +46,7 @@ void Chicken::updatePosition(){
     case ChickenState::TOFOOD:
         if(!foods->empty()){
             //aligning x axis;
-            if(foods->at(0)->position[0]>position[0]){
+            if(food.first->position[0]>position[0]){
                 position[0]++;
             }
             else{
@@ -30,20 +54,20 @@ void Chicken::updatePosition(){
             }
             
             //aligning y axis
-            if(foods->at(0)->position[1]>position[1]){
+            if(food.first->position[1]>position[1]){
                 position[1]++; 
             }
             else{
                 position[1]--;
             }
             //check collision
-            int diffX = abs(foods->at(0)->position[0] - position[0]);
-            int diffY = abs(foods->at(0)->position[1] - position[1]);
+            int diffX = abs(food.first->position[0] - position[0]);
+            int diffY = abs(food.first->position[1] - position[1]);
 
             if (diffX <= 1 && diffY <= 1) {
             
-                delete foods->at(0); 
-                foods->erase(foods->begin());
+                delete foods->at(food.second); 
+                foods->erase(foods->begin()+food.second);
             }
             
         }   

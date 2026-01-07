@@ -2,7 +2,7 @@
 CXX      = g++
 CXXFLAGS = -Wall -I./src  # -I./src sayesinde #include "view/view.hpp" diyebilirsin
 LIBS     = -lncurses
-TARGET   = main
+TARGET   = chickens
 
 SRCS = ./src/view/view.cpp \
        ./src/models/models.cpp \

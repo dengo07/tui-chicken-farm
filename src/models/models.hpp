@@ -3,6 +3,7 @@
 
 #include<string>
 #include<vector>
+#include<cmath>
 
 //states for chicken behaviours
 enum class ChickenState{
@@ -29,7 +30,7 @@ struct Chicken
     std::vector<Food*>* foods;
     int* position = new int[2];//position (x,y)
     void setState(ChickenState);
-    Food* closestFood();
+    std::pair<Food*,int> closestFood();
     void updatePosition();
 };
 
