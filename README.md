@@ -89,7 +89,7 @@ The codebase is organized into specific directories reflecting the MVC pattern:
 
 ```text
 .
-[cite_start]├── Makefile             # Build configuration [cite: 1]
+Makefile             # Build configuration
 ├── src
 │   ├── main.cpp         # Entry point and initialization
 │   ├── controller
