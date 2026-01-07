@@ -7,6 +7,9 @@ This project is an experimental, terminal-based simulation application developed
 
 The software is currently in the development phase. It implements the Model-View-Controller (MVC) architectural pattern to ensure a separation of concerns between the simulation logic, the user interface, and user input handling.
 
+##GIF
+![Demo](assets/chickenfarm-tui.gif)
+
 ## Features
 
 * **MVC Architecture:** Clean separation of data (Models), rendering (View), and logic (Controller).
