@@ -6,34 +6,52 @@ void Chicken::setState(ChickenState newState){
 
 
 std::pair<Food*, int> Chicken::closestFood() {
-   
-    std::pair<Food*, int> ret = {nullptr, -1};
+    std::pair<Food*, int> bestTarget = {nullptr, -1}; 
+    std::pair<Food*, int> backupTarget = {nullptr, -1}; 
 
     if (foods == nullptr || foods->empty()) {
-        return ret;
+        return bestTarget;
     }
 
-    double minDistance = 1e18; 
+    double minFreeDist = 1e18; 
+    double minAnyDist = 1e18;  
 
     for (int i = 0; i < foods->size(); i++) {
-        int dx = foods->at(i)->position[0] - position[0];
-        int dy = foods->at(i)->position[1] - position[1];
+        Food* currentFood = foods->at(i);
         
-        double currDistance = sqrt(dx * dx + dy * dy); 
 
-        if (currDistance < minDistance) {
-            minDistance = currDistance;
-            ret.first = foods->at(i);
-            ret.second = i;
+        double dx = currentFood->position[0] - position[0];
+        double dy = currentFood->position[1] - position[1];
+        double dist = sqrt(dx * dx + dy * dy);
+
+        if (!currentFood->isFull) {
+            if (dist < minFreeDist) {
+                minFreeDist = dist;
+                bestTarget = {currentFood, i};
+            }
+        }
+
+        else {
+            if (dist < minAnyDist) {
+                minAnyDist = dist;
+                backupTarget = {currentFood, i};
+            }
         }
     }
-    return ret;
+
+  
+    if (bestTarget.first != nullptr) {
+        return bestTarget;
+    }
+    
+    return backupTarget;
 }
 
 void Chicken::updatePosition(){
-    std::pair<Food*,int> food;
  
-    food = closestFood();
+    if(targetedFood.first == nullptr){
+        targetedFood = closestFood();
+    }
     
     switch (state)
     {
@@ -44,9 +62,26 @@ void Chicken::updatePosition(){
         /* code */
         break;
     case ChickenState::TOFOOD:
-        if(!foods->empty()){
+
+        if (targetedFood.first != nullptr) {
+        bool targetStillExists = false;
+        for (auto f : *foods) {
+            if (f == targetedFood.first) {
+                targetStillExists = true;
+                break;
+            }
+        }
+            
+ 
+        if (!targetStillExists) {
+            targetedFood = {nullptr, -1};
+            state = ChickenState::WALKING; 
+            return; 
+            }
+        }
+        if(!foods->empty() && targetedFood.first != nullptr){
             //aligning x axis;
-            if(food.first->position[0]>position[0]){
+            if(targetedFood.first->position[0]>position[0]){
                 position[0]++;
             }
             else{
@@ -54,20 +89,30 @@ void Chicken::updatePosition(){
             }
             
             //aligning y axis
-            if(food.first->position[1]>position[1]){
+            if(targetedFood.first->position[1]>position[1]){
                 position[1]++; 
             }
             else{
                 position[1]--;
             }
             //check collision
-            int diffX = abs(food.first->position[0] - position[0]);
-            int diffY = abs(food.first->position[1] - position[1]);
+            int diffX = abs(targetedFood.first->position[0] - position[0]);
+            int diffY = abs(targetedFood.first->position[1] - position[1]);
 
             if (diffX <= 1 && diffY <= 1) {
-            
-                delete foods->at(food.second); 
-                foods->erase(foods->begin()+food.second);
+                if(targetedFood.first != nullptr){
+                    bool found = false;
+                    for(auto it = foods->begin(); it != foods->end(); ++it) {
+                        if (*it == targetedFood.first) {
+                            delete *it;       
+                            foods->erase(it); 
+                            found = true;
+                            break; 
+                        }
+                    }
+                    targetedFood = {nullptr, -1};
+                }
+                
             }
             
         }   

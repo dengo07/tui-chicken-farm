@@ -20,6 +20,7 @@ Controller::Controller(View* v ,std::vector<Chicken*>* c,std::vector<Food*>* f){
     std::uniform_int_distribution<> x(0,randx);
     std::uniform_int_distribution<> y(0,randy);
     Food* food = new Food();
+    food->isFull = false;
     food->position[0] = x(gen);
     food->position[1] = y(gen);
     foods->push_back(food);

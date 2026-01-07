@@ -16,6 +16,7 @@ enum class ChickenState{
 struct Food{
     std::string art = ":::";
     int* position = new int[2];//position (x,y)
+    bool isFull = false;
 
 };
 
@@ -28,6 +29,7 @@ struct Chicken
     std::string name;
     ChickenState state;
     std::vector<Food*>* foods;
+    std::pair<Food*,int> targetedFood;
     int* position = new int[2];//position (x,y)
     void setState(ChickenState);
     std::pair<Food*,int> closestFood();
