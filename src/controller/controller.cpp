@@ -56,8 +56,8 @@ void Controller::run(){
             static int x = 1; static int y =1;
             Chicken* chick = new Chicken();
             chick->foods = foods;
-            chick->position[0] = ++x;
-            chick->position[1] = ++y;
+            chick->position[0] = x;
+            chick->position[1] = y;
             chickens->push_back(chick);
         }
 
