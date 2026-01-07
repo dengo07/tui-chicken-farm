@@ -11,6 +11,21 @@ Controller::Controller(View* v ,std::vector<Chicken*>* c,std::vector<Food*>* f){
 
  }
 
+
+ void Controller::randomFeeding(){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    int randy = getmaxy(stdscr)-2;
+    int randx = getmaxx(stdscr)-2;
+    std::uniform_int_distribution<> x(0,randx);
+    std::uniform_int_distribution<> y(0,randy);
+    Food* food = new Food();
+    food->position[0] = x(gen);
+    food->position[1] = y(gen);
+    foods->push_back(food);
+ }
+
+
 void Controller::run(){
     int ch;
     MEVENT event;
@@ -33,6 +48,7 @@ void Controller::run(){
                 foods->push_back(food);
             }
         }
+        
 
         // 'a' key to add chickensss
         if(ch == 'a'){
@@ -64,6 +80,8 @@ void Controller::run(){
 
         
         }
+    //random feeding when not pressing mouse
+    randomFeeding();
     view->render(chickens,foods);
     }
 
