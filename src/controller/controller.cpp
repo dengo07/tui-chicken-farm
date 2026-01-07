@@ -26,11 +26,19 @@ void Controller::run(){
 
             // left click
             if (event.bstate & BUTTON1_CLICKED) {
-                Food food;
-                food.position[0] = x;
-                food.position[1] = y;
-                foods->push_back(&food);
+                Food* food = new Food();
+                food->position[0] = x;
+                food->position[1] = y;
+                foods->push_back(food);
             }
+        }
+
+        if(ch == 'a'){
+            static int x = 1; static int y =1;
+            Chicken* chick = new Chicken();
+            chick->position[0] = ++x;
+            chick->position[1] = ++y;
+            chickens->push_back(chick);
         }
         view->render(chickens,foods);
     }
