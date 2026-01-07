@@ -13,7 +13,7 @@ struct View
 
     WINDOW* mainWindow = newwin(30,30,0,0);
 
-    void render(std::vector<Chicken*>*,std::vector<Food*>*);
+    void render(std::vector<Chicken*>*,std::vector<Food*>*,int);
 };
 
 

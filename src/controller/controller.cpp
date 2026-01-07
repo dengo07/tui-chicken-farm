@@ -60,6 +60,17 @@ void Controller::run(){
             chickens->push_back(chick);
         }
 
+        if(ch == KEY_UP){//to increase game speed
+            gameSpeed--;
+            if(gameSpeed<=10){gameSpeed = 10;}
+            timeout(gameSpeed);
+        }
+        else if(ch == KEY_DOWN){//to decrease game speed
+            gameSpeed++;
+            if(gameSpeed>=110){gameSpeed = 110;}
+            timeout(gameSpeed);
+        }
+
         //Setting chickens state to TOFOOD if there is food on the screen
         if(!foods->empty() && !chickens->empty() ){
             for(int i = 0; i<chickens->size();i++){
@@ -82,7 +93,7 @@ void Controller::run(){
         }
     //random feeding when not pressing mouse
     randomFeeding();
-    view->render(chickens,foods);
+    view->render(chickens,foods,gameSpeed);
     }
 
 } 

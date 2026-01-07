@@ -10,6 +10,7 @@ struct Controller
 {
     std::vector<Chicken*>* chickens;
     std::vector<Food*>* foods;
+    int gameSpeed = 60;
     View* view;
 
     Controller(View*,std::vector<Chicken*>* ,std::vector<Food*>* );
