@@ -7,10 +7,13 @@
 
 struct Controller
 {
-    std::vector<Chicken*> chickens;
-    std::vector<Food*> foods;
+    std::vector<Chicken*>* chickens;
+    std::vector<Food*>* foods;
+    View* view;
 
-    void run(View&);
+    Controller(View*,std::vector<Chicken*>* ,std::vector<Food*>* );
+
+    void run();
 };
 
 

@@ -7,6 +7,7 @@ void initialize(){
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
     curs_set(0);
     timeout(100);
 
@@ -15,7 +16,11 @@ void initialize(){
 int main(){
     initialize();
     View view;
-    Controller controller;
-    controller.run(view);
+    
+    std::vector<Chicken*> chickens;
+    std::vector<Food*> foods;
+    Controller controller(&view,&chickens,&foods);
+
+    controller.run();
     return 0;
 }

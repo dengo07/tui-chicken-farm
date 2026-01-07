@@ -2,6 +2,8 @@
 #define VIEW_HPP
 
 #include<ncurses.h>
+#include<vector>
+#include "../models/models.hpp"
 
 struct View
 {   
@@ -11,7 +13,7 @@ struct View
 
     WINDOW* mainWindow = newwin(30,30,0,0);
 
-    void render();
+    void render(std::vector<Chicken*>*,std::vector<Food*>*);
 };
 
 

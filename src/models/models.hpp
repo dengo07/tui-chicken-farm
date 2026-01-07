@@ -14,7 +14,7 @@ enum class ChickenState{
 //Chicken model
 struct Chicken
 {
-    std::string art = "🐔";
+    std::string art = "C";
     std::string name;
     ChickenState state;
     int* position = new int[2];//position (x,y)
@@ -22,9 +22,10 @@ struct Chicken
     void updatePosition();
 };
 
+
 //Food model
 struct Food{
-    std::string art = "🍞";
+    std::string art = ":::";
     int* position = new int[2];//position (x,y)
 
 };
