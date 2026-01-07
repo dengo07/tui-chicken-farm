@@ -5,6 +5,12 @@ void View::render(){
     termY = getmaxy(stdscr);//terminal height 
     mainWindowHeight = termY; 
     mainWindowWidth = termX; 
+    
     wresize(mainWindow,mainWindowHeight-1,mainWindowWidth-1); 
-    box(mainWindow,0,0); 
-    wrefresh(mainWindow); }
+    wclear(mainWindow);
+    box(mainWindow,0,0);
+    
+    wrefresh(mainWindow);
+    refresh(); 
+
+}

@@ -9,8 +9,7 @@ struct View
     int mainWindowHeight;
     int mainWindowWidth;
 
-    WINDOW* mainWindow = newwin(termY-1,termX-1,0,0);
-
+    WINDOW* mainWindow = newwin(30,30,0,0);
 
     void render();
 };

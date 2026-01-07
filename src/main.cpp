@@ -1,5 +1,6 @@
 #include<ncurses.h>
 #include "view/view.hpp"
+#include "controller/controller.hpp"
 
 void initialize(){
     initscr();
@@ -7,12 +8,14 @@ void initialize(){
     noecho();
     keypad(stdscr, TRUE);
     curs_set(0);
+    timeout(100);
 
 }
 
 int main(){
     initialize();
     View view;
-    view.render(); 
+    Controller controller;
+    controller.run(view);
     return 0;
 }
