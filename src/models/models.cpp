@@ -5,6 +5,7 @@ void Chicken::setState(ChickenState newState){
 }
 
 
+
 std::pair<Food*, int> Chicken::closestFood() {
     std::pair<Food*, int> bestTarget = {nullptr, -1}; 
     std::pair<Food*, int> backupTarget = {nullptr, -1}; 

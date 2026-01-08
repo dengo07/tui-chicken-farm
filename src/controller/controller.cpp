@@ -60,6 +60,12 @@ void Controller::run(){
             chick->position[1] = y;
             chickens->push_back(chick);
         }
+        // 'd' key to delete chickensss
+        if(ch == 'd'){
+            if(!chickens->empty())
+                chickens->erase(chickens->begin());
+
+        }
 
         if(ch == KEY_UP){//to increase game speed
             gameSpeed--;

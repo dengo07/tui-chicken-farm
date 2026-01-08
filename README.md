@@ -83,6 +83,9 @@ make run
 The simulation is controlled via the following inputs:
 
 * **`a` Key:** Adds a new chicken entity to the screen at a default starting position.
+* **`d` Key:** delete a chicken entity.
+* **`up` Key:** Increases game speed.
+* **`down` Key:** Decreases game speed.
 * **Left Mouse Click:** Places a food unit (`:::`) at the cursor's location.
 * **`q` Key:** Terminates the application and closes the window.
 

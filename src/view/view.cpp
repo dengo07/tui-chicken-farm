@@ -25,12 +25,9 @@ void View::render(std::vector<Chicken*>* chickens,std::vector<Food*>* foods,int 
     }
 
     //print stats(speed of game and chicken count)
-    std::string title1 = "Chicken Count: "+std::to_string(chickens->size());
-    std::string title2 = "Food Count: "+std::to_string(foods->size());
-    std::string title3 = "Game Speed: "+std::to_string(110-gameSpeed);
-    mvprintw(termY-1,0,title1.c_str());
-    mvprintw(termY-1,20,title2.c_str());
-    mvprintw(termY-1,40,title3.c_str());
+    mvprintw(termY-1, 0,  "Chicken Count: %3zu", chickens->size());
+    mvprintw(termY-1, 20, "Food Count: %3zu", foods->size());
+    mvprintw(termY-1, 40, "Game Speed: %3d", 110 - gameSpeed);
 
     wrefresh(mainWindow);
     refresh(); 
