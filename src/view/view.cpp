@@ -25,8 +25,8 @@ void View::render(std::vector<Chicken*>* chickens,std::vector<Food*>* foods,int 
     }
 
     //print stats(speed of game and chicken count)
-    mvprintw(termY-1, 0,  "Chicken Count: %3zu", chickens->size());
-    mvprintw(termY-1, 20, "Food Count: %3zu", foods->size());
+    mvprintw(termY-1, 0,  "Chicken Count: %4zu", chickens->size());
+    mvprintw(termY-1, 20, "Food Count: %4zu", foods->size());
     mvprintw(termY-1, 40, "Game Speed: %3d", 110 - gameSpeed);
 
     wrefresh(mainWindow);
